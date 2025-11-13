@@ -35,14 +35,14 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const APP_NAME = "Uni CC";
+const APP_NAME = "VTOP";
 const APP_DESCRIPTION = "Taking data from VTOP and displaying it in a clean and simple way.";
 
 export const metadata: Metadata = {
   applicationName: APP_NAME,
   title: {
     default: APP_NAME,
-    template: "%s - UniCC App",
+    template: "%s - VTOP App",
   },
   description: APP_DESCRIPTION,
   manifest: "/manifest.json",
@@ -64,19 +64,24 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head />
+      <head suppressHydrationWarning />
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${roboto.variable} antialiased`}
+        suppressHydrationWarning
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-          value={{ light: "light", dark: "dark", midnight: "midnight" }}
-        >
-          {children}
-        </ThemeProvider>
+        <div suppressHydrationWarning>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+            value={{ light: "light", dark: "dark", midnight: "midnight" }}
+          >
+            <div suppressHydrationWarning>
+              {children}
+            </div>
+          </ThemeProvider>
+        </div>
         <Analytics />
         <SpeedInsights />
       </body>

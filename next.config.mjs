@@ -5,6 +5,7 @@ const withSerwist = withSerwistInit({
   cacheOnNavigation: true,
   swSrc: "src/app/sw.js",
   swDest: "public/sw.js",
+  disable: process.env.NODE_ENV === "development", // Disable in dev
 });
 
 /** @type {import('next').NextConfig} */
@@ -12,6 +13,9 @@ const nextConfig = {
   reactStrictMode: true,
   devIndicators: false,
   cacheComponents: true,
+  experimental: {
+    optimizePackageImports: ['lucide-react'],
+  },
   cacheLife: {
     halfHour: {
       stale: 60 * 5,

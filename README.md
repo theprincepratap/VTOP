@@ -1,4 +1,4 @@
-# UniCC
+# VTOP
 
 **Live site:** [uni-cc.vercel.app](https://uni-cc.vercel.app)
 
@@ -6,19 +6,19 @@
 
 ## Overview
 
-UniCC is a web app designed specifically for students of a Specific Uni. It provides a minimalist experience to help students access campus-related resources and tools. e.
+VTOP is a web app designed specifically for students of a Specific Uni. It provides a minimalist experience to help students access campus-related resources and tools. e.
 
 Captcha Solver code taken from [ViBoot-Enhanced](https://github.com/arshsaxena/ViBoot-Enhanced/blob/main/js/captcha/captchaparser.js)
 
 ## Getting Started
 
-To run UniCC locally:
+To run VTOP locally:
 
 1. **Clone the repository:**
 
    ```bash
    git clone https://github.com/Arya4930/UniCC.git
-   cd UniCC
+   cd VTOP
    ```
 2. **Install dependencies:**
    *(If a package manager like pnpm is used)*

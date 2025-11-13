@@ -71,7 +71,7 @@ export default function Footer({ isLoggedIn, currSemesterID, setCurrSemesterID, 
         <div className="flex items-center justify-center gap-2 mb-4">
           <Button variant="outline" size="icon" asChild>
             <a
-              href="https://github.com/Arya4930/UniCC"
+              href="https://github.com/Arya4930/VTOP"
               target="_blank"
               rel="noopener noreferrer"
             >

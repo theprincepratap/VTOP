@@ -1,6 +1,6 @@
 {
     "main": ".open-next/worker.js",
-    "name": "unicc",
+    "name": "vtop",
     "compatibility_date": "2025-09-01",
     "compatibility_flags": [
         "nodejs_compat"

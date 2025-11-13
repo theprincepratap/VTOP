@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { ReloadModal } from "./reloadModel";
 import LoginForm from "./loginForm";
 import DashboardContent from "./Dashboard";
-import Footer from "./footer/Footer";
 import { solveCaptchaClient } from "@/lib/solveCaptcha";
 import config from '../../app/config.json'
 import { attendanceRes, ODListItem, ODListRaw } from "@/types/data/attendance";
@@ -37,8 +36,10 @@ export default function LoginPage() {
   const [calendarType, setCalenderType] = useState<string | null>(null)
   const [progressBar, setProgressBar] = useState<number>(0);
   const [currSemesterID, setCurrSemesterID] = useState<string>(config.semesterIDs[config.semesterIDs.length - 2]);
+  const [isMounted, setIsMounted] = useState<boolean>(false);
 
   useEffect(() => {
+    setIsMounted(true);
     const day = new Date().toLocaleDateString("en-US", { weekday: "short" }).toUpperCase();
     setActiveDay(day);
   }, []);
@@ -375,9 +376,9 @@ export default function LoginPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 midnight:bg-black">
-        <div className="flex flex-col items-center space-y-4">
-          <div className="animate-spin rounded-full h-12 w-12 border-4 border-t-transparent border-gray-500"></div>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 midnight:bg-black" suppressHydrationWarning>
+        <div className="flex flex-col items-center space-y-4" suppressHydrationWarning>
+          <div className="animate-spin rounded-full h-12 w-12 border-4 border-t-transparent border-gray-500" suppressHydrationWarning></div>
           <p className="text-gray-600 dark:text-gray-300">Loading app...</p>
         </div>
       </div>
@@ -385,7 +386,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 midnight:bg-black flex flex-col text-gray-900 dark:text-gray-100 midnight:text-gray-100 transition-colors">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 midnight:bg-black flex flex-col text-gray-900 dark:text-gray-100 midnight:text-gray-100 transition-colors" suppressHydrationWarning>
       {isReloading && (
         <ReloadModal
           message={message}
@@ -395,7 +396,7 @@ export default function LoginPage() {
       )}
 
       {!isLoggedIn && (
-        <div className="flex-grow flex items-center justify-center p-4">
+        <div className="flex-grow flex items-center justify-center p-4" suppressHydrationWarning>
           <LoginForm
             username={username}
             setUsername={setUsername}
@@ -456,14 +457,6 @@ export default function LoginPage() {
           />
         </>
       )}
-
-      <Footer
-        isLoggedIn={isLoggedIn}
-        currSemesterID={currSemesterID}
-        setCurrSemesterID={setCurrSemesterID}
-        handleLogin={handleLogin}
-        setIsReloading={setIsReloading}
-      />
     </div>
   );
 }

@@ -4,7 +4,7 @@ import { Progress } from "@/components/ui/progress";
 import NoContentFound from "../NoContentFound";
 
 export default function GradesDisplay({ data, handleFetchGrades, marksData, attendance }) {
-  if (!data || !marksData.cgpa) {
+  if (!data || !marksData || !marksData.cgpa || !data.curriculum) {
     return (
       <div>
         <p className="text-center text-gray-600 dark:text-gray-300 midnight:text-gray-200">
@@ -17,6 +17,10 @@ export default function GradesDisplay({ data, handleFetchGrades, marksData, atte
       </div>
     );
   }
+
+  // Safety check for grades object
+  const gradesData = data.cgpa?.grades;
+  const hasValidGrades = gradesData && typeof gradesData === 'object' && !Array.isArray(gradesData) && Object.keys(gradesData).length > 0;
 
   const ongoingCreditsByCategory = attendance.reduce((acc, item) => {
     let category = item.category || "Uncategorized";
@@ -51,7 +55,7 @@ export default function GradesDisplay({ data, handleFetchGrades, marksData, atte
     (c) => specialBaskets.some((b) => c.basketTitle.toLowerCase().includes(b.toLowerCase()))
   );
 
-  const totalInProgress = Object.values(ongoingCreditsByCategory).reduce((a, b) => a + b, 0);
+  const totalInProgress = Object.values(ongoingCreditsByCategory).reduce((a, b) => (a as number) + (b as number), 0) as number;
 
 
   return (
@@ -63,7 +67,7 @@ export default function GradesDisplay({ data, handleFetchGrades, marksData, atte
           </button></CardTitle>
         </CardHeader>
         <CardContent className="grid grid-cols-4 md:grid-cols-8 gap-2 text-center text-sm">
-          {Object.entries(data.cgpa.grades as Record<string, number>).map(([grade, count]) => (
+          {hasValidGrades && Object.entries(gradesData as Record<string, number>).map(([grade, count]) => (
             <div
               key={grade}
               className="p-2 rounded-lg bg-gray-100 dark:bg-slate-700 midnight:bg-gray-800 text-gray-900 dark:text-gray-100 midnight:text-gray-100 font-bold"

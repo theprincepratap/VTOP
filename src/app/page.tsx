@@ -2,7 +2,7 @@ import Main from "../components/custom/Main";
 
 export default function Home() {
   return (
-    <div>
+    <div suppressHydrationWarning>
       <Main />
     </div>
   );
